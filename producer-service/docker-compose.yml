@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  producer:
+    build: .
+    command: python main.py
+    volumes:
+      - .:/code
+    ports:
+      - '8888:8888'
+    restart: always
+    expose:
+      - '8888'
