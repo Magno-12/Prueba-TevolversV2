@@ -50,14 +50,6 @@ html = """
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
-    """
-    TODO:
-    - Understand deeply the redis-py.xread method:
-      - why we need to send a list of stream? I didn't want get the first [0] element
-      - why it returns bytes, Is the .decode a good way?
-      - is there a better way to convert it to python dict?
-      - what is the a good number for the sleep/block?
-    """
     last_id = 0
     sleep_ms = 5000
 
