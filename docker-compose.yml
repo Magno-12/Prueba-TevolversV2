@@ -1,8 +1,30 @@
 version: "3.4"
 services:
+  requirements:
+    image: python:3.7
+    command: pip install -r requirements.txt
+
   redis:
     image: redis
     ports:
       - 6379:6379
     expose:
       - "6379"
+
+  producer:
+    container_name: producer
+    build:
+      context: /producer
+      dockerfile: Dockerfile
+    depends_on:
+      - requirements
+      - redis
+
+  consumer:
+    container_name: consumer
+    build:
+      context: /consumer
+      dockerfile: Dockerfile
+    depends_on:
+      - requirements
+      - redis
