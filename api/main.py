@@ -14,7 +14,7 @@ import rel
 app = FastAPI()
 
 stream_key = environ.get("STREAM", "metrics")
-hostname = environ.get("REDIS_HOSTNAME", "95c42ab9ba64")
+hostname = environ.get("REDIS_HOSTNAME", "95c42ab9ba64") #CONTEINER_ID REDIS WHEN RUNNING IN DOCKER, WHEN IS LOCALLY IS localhost
 port = environ.get("REDIS_PORT", 6379)
 redis_cli = Redis(hostname, port, retry_on_timeout=True)
 
