@@ -16,3 +16,4 @@ watchgod==0.7
 websockets==9.1
 websocket-client==1.4.1
 rel==0.4.7
+win10toast==0.9

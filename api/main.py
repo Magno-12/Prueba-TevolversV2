@@ -71,4 +71,3 @@ async def websocket_endpoint(websocket: WebSocket):
 @app.get('/metrics')
 async def metrics():
     return HTMLResponse(html)
-    
