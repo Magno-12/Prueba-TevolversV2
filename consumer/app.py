@@ -4,7 +4,7 @@ from redis import Redis
 stream_key = environ.get("STREAM", "metrics")
 
 def connect_to_redis():
-    hostname = environ.get("REDIS_HOSTNAME", "localhost")
+    hostname = environ.get("REDIS_HOSTNAME", "95c42ab9ba64")
     port = environ.get("REDIS_PORT", 6379)
 
     r = Redis(hostname, port, retry_on_timeout=True)

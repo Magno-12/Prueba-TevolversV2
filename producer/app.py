@@ -10,7 +10,7 @@ producer = environ.get("PRODUCER", "user-admin")
 MAX_MESSAGES = int(environ.get("MESSAGES", "2"))
 
 def connect_to_redis():
-    hostname = environ.get("REDIS_HOSTNAME", "localhost")
+    hostname = environ.get("REDIS_HOSTNAME", "95c42ab9ba64")
     port = environ.get("REDIS_PORT", 6379)
 
     r = Redis(hostname, port, retry_on_timeout=True)

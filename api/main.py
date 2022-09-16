@@ -14,7 +14,7 @@ import rel
 app = FastAPI()
 
 stream_key = environ.get("STREAM", "metrics")
-hostname = environ.get("REDIS_HOSTNAME", "localhost")
+hostname = environ.get("REDIS_HOSTNAME", "95c42ab9ba64")
 port = environ.get("REDIS_PORT", 6379)
 redis_cli = Redis(hostname, port, retry_on_timeout=True)
 
@@ -29,7 +29,7 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var ws = new WebSocket("ws://localhost:8000/ws");
+            var ws = new WebSocket("ws://95c42ab9ba64:8000/ws");
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')

@@ -1,13 +1,19 @@
 version: "2.10.2"
 services:
-  requirements:
-    image: python:3.7
-    command: pip install -r requirements.txt
 
   redis:
-    image: redis
+    image: "redis:alpine"
+    command: redis-server --requirepass 123456789
     ports:
       - 6379:6379
+    volumes:
+     - $PWD/redis-data:/var/lib/redis
+     - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+     - REDIS_REPLICATION_MODE=master
+    networks:
+      node_net:
+        ipv4_address: 172.28.1.4
     expose:
       - "6379"
 
@@ -20,21 +26,36 @@ services:
     environment:
       PORT: 5000
       FLASK_DEBUG: 1
+    depends_on:
+      - redis
 
   producer:
     container_name: producer
-    build:
-      context: /producer
-      dockerfile: Dockerfile
+    build: ./producer/
+    volumes:
+      - ./producer/:/usr/src/producer/
+    ports:
+      - 5100:5100
+    environment:
+      PORT: 5100
     depends_on:
-      - requirements
       - redis
 
   consumer:
     container_name: consumer
-    build:
-      context: /consumer
-      dockerfile: Dockerfile
+    build: ./consumer/
+    volumes:
+      - ./consumer/:/usr/src/consumer/
+    ports:
+      - 5200:5200
+    environment:
+      PORT: 5200
     depends_on:
-      - requirements
       - redis
+
+networks:
+  node_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
