@@ -7,10 +7,10 @@ services:
     ports:
       - 6379:6379
     volumes:
-     - $PWD/redis-data:/var/lib/redis
-     - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
     environment:
-     - REDIS_REPLICATION_MODE=master
+      - REDIS_REPLICATION_MODE=master
     networks:
       node_net:
         ipv4_address: 172.28.1.4
@@ -26,6 +26,8 @@ services:
     environment:
       PORT: 5000
       FLASK_DEBUG: 1
+    networks:
+      - node_net
     depends_on:
       - redis
 
@@ -38,6 +40,8 @@ services:
       - 5100:5100
     environment:
       PORT: 5100
+    networks:
+      - node_net
     depends_on:
       - redis
 
@@ -50,6 +54,8 @@ services:
       - 5200:5200
     environment:
       PORT: 5200
+    networks:
+      - node_net
     depends_on:
       - redis
 

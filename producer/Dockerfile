@@ -2,6 +2,6 @@ FROM python:3.9
 RUN mkdir /usr/src/producer/
 COPY . /usr/src/producer/
 WORKDIR /usr/src/producer/
-EXPOSE 5000
+EXPOSE 5100:5100
 RUN pip install -r requirements.txt
 CMD [ "python", "app.py"]

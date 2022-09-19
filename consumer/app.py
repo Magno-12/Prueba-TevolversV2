@@ -4,10 +4,10 @@ from redis import Redis
 stream_key = environ.get("STREAM", "metrics")
 
 def connect_to_redis():
-    hostname = environ.get("REDIS_HOSTNAME", "95c42ab9ba64")
+    hostname = environ.get("REDIS_HOSTNAME", "redis")
     port = environ.get("REDIS_PORT", 6379)
 
-    r = Redis(hostname, port, retry_on_timeout=True)
+    r = Redis(hostname, port, retry_on_timeout=True, password="123456789")
     return r
 
 def get_data(redis_connection):
@@ -26,7 +26,6 @@ def get_data(redis_connection):
 
         except ConnectionError as e:
             print("ERROR REDIS CONNECTION: {}".format(e))
-
 
 if __name__ == "__main__":
     connection = connect_to_redis()

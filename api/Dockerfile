@@ -4,4 +4,4 @@ COPY . /usr/src/app/
 WORKDIR /usr/src/app/
 EXPOSE 5000
 RUN pip install -r requirements.txt
-CMD ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0"]
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0"]
